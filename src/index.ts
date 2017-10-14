@@ -3,7 +3,7 @@ import * as bodyParser from "body-parser";
 import * as express from "express";
 import { Application } from "express";
 import * as serveStatic from "serve-static";
-import {Socket} from "./socket";
+import Socket from "./socket";
 
 // config
 const host = process.env.YOUR_HOST || "localhost";

@@ -1,4 +1,4 @@
-export class Person {
+export default class Person {
   private name: string;
   private lastSeen: Date;
 
@@ -13,5 +13,9 @@ export class Person {
 
   public getLastSeen(): Date {
     return this.lastSeen;
+  }
+
+  public getName(): string {
+    return this.name;
   }
 }
