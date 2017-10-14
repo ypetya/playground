@@ -19,14 +19,17 @@
     "build": "npm run clean && npm run lint && echo Using TypeScript && tsc --version && tsc --pretty",
     "test": "npm run build && mocha --compilers ts:ts-node/register --recursive \"test/**/*-spec.ts\"",
     "serve": "npm run build && node lib/index.js",
+    "serve2": "nodemon lib/index.js",
     "coverage": "nyc --include=\"src/**/*.ts\" --reporter=text --reporter=html --reporter=lcov mocha --compilers ts:ts-node/register --recursive \"test/**/*-spec.ts\"",
     "watch": "npm run build -- --watch",
     "watch:test": "npm run test -- --watch"
   },
   "dependencies": {
-      "body-parser": "^1.17.2",
-      "express": "^4.15.3",
-      "lodash": "^4.17.4"
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "lodash": "^4.17.4",
+    "nodemon": "^1.12.1",
+    "socket.io": "^2.0.3"
   },
   "devDependencies": {
     "@types/body-parser": "^1.16.3",
