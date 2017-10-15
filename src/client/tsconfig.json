@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "module": "amd",
+    "allowJs": true,
+    "maxNodeModuleJsDepth": 10,
+    "listEmittedFiles": true,
+    "listFiles": true,
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "outFile": "../../lib/client/clientBundle.js",
+    "preserveConstEnums": true,
+    "removeComments": true,
+    "typeRoots": [
+      "../../node_modules/@types"
+    ],
+    "pretty": true,
+    "sourceMap": true,
+    "sourceRoot": "../",
+    "rootDirs": [
+      "../../node_modules"
+    ]
+  },
+  "include": [
+    "**/*.ts"
+  ],
+  "exclude": [
+    
+  ]
+}

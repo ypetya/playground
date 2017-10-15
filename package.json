@@ -11,17 +11,21 @@
   "files": [
     "lib"
   ],
-  "main": "lib/index.js",
-  "typings": "lib/index.d.ts",
+  "main": "lib/server/index.js",
+  "typings": "lib/server/index.d.ts",
   "scripts": {
     "clean": "rimraf lib",
+    "clean:client": "rimraf lib/client",
+    "clean:server": "rimraf lib/server",
     "lint": "tslint --force --format verbose \"src/**/*.ts\"",
-    "build": "npm run clean && npm run lint && echo Using TypeScript && tsc --version && tsc --pretty",
+    "build": "npm run clean && npm run build:server && npm run build:client",
+    "build:server": "tsc --pretty",
+    "build:client": "tsc -p src/client/",
     "test": "npm run build && mocha --compilers ts:ts-node/register --recursive \"test/**/*-spec.ts\"",
-    "serve": "npm run build && node lib/index.js",
-    "serve2": "nodemon lib/index.js",
+    "serve": "node lib/server/index.js",
+    "serve:dev": "npm run watch & nodemon lib/server/index.js",
     "coverage": "nyc --include=\"src/**/*.ts\" --reporter=text --reporter=html --reporter=lcov mocha --compilers ts:ts-node/register --recursive \"test/**/*-spec.ts\"",
-    "watch": "npm run build -- --watch",
+    "watch": "npm run build:server -- --watch",
     "watch:test": "npm run test -- --watch"
   },
   "dependencies": {
@@ -29,6 +33,7 @@
     "express": "^4.15.3",
     "lodash": "^4.17.4",
     "nodemon": "^1.12.1",
+    "requirejs": "^2.3.5",
     "socket.io": "^2.0.3"
   },
   "devDependencies": {

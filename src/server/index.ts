@@ -1,8 +1,6 @@
 
-import * as bodyParser from "body-parser";
 import * as express from "express";
 import { Application } from "express";
-import * as serveStatic from "serve-static";
 import Socket from "./socket";
 
 // config
@@ -18,10 +16,8 @@ app.all('/', (req, res, next: Function) => {
 });
 
 // static
-app.use(serveStatic(__dirname + "/../src/public"));
-app.use("/node_modules", serveStatic(__dirname + "/../node_modules"));
-app.use("/client", serveStatic(__dirname + "/client"));
-
+app.use(express.static(__dirname + "/../../src/public"));
+app.use("/client", express.static(__dirname + "/../client"));
 // serve
 const server = app.listen(port, host, () => {
     console.info(`App listening on port ${port}! ${__dirname}`);

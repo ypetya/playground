@@ -1,6 +1,6 @@
-import Lobby from "./lobby";
+import Lobby from "../model/lobby";
 
-var socketIo = require("socket.io");
+let socketIo = require("socket.io");
 
 interface IOSocket {
     on: Function;
