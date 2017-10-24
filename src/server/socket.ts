@@ -1,15 +1,8 @@
 import Lobby from "../model/lobby";
+import { IOSocket, TransferObject } 
+from "../interface/definitions";
 
 let socketIo = require("socket.io");
-
-interface IOSocket {
-    on: Function;
-    emit: Function;
-}
-
-interface TransferObject {
-    name: string;
-}
 
 export default class Socket {
     private io : IOSocket;

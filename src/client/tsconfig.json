@@ -7,7 +7,8 @@
     "listFiles": true,
     "moduleResolution": "node",
     "noImplicitAny": true,
-    "outFile": "../../lib/client/clientBundle.js",
+    //"outFile": "../../lib/client/clientBundle.js",
+    "outDir": "../../lib/client",
     "preserveConstEnums": true,
     "removeComments": true,
     "typeRoots": [

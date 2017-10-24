@@ -1,18 +1,24 @@
 
 import Person from "../model/person";
+import Lobby from "../model/lobby";
+import config from "../config/config";
+import { TransferObject }
+    from "../interface/definitions";
 
-const socket = io('http://localhost:8080');
+import io = require("socket.io");
 
-socket.on('lobby', (data) => {
-    console.log(data.people);
+const socket: any = io(config.url);
+
+socket.on('lobby', (data: Lobby) => {
+    console.log(data.toString());
     console.log(new Person("peter"));
     socket.emit('add', {
         name: 'Peter'
     });
 });
 
-export default function ok(){
+export default function ok() {
     console.log('ok');
-}
+};
 
 // function addElement()

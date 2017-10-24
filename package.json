@@ -23,6 +23,7 @@
     "build:client": "tsc -p src/client/",
     "test": "npm run build && mocha --compilers ts:ts-node/register --recursive \"test/**/*-spec.ts\"",
     "serve": "node lib/server/index.js",
+    "run": "npm run build && npm run serve",
     "serve:dev": "npm run watch & nodemon lib/server/index.js",
     "coverage": "nyc --include=\"src/**/*.ts\" --reporter=text --reporter=html --reporter=lcov mocha --compilers ts:ts-node/register --recursive \"test/**/*-spec.ts\"",
     "watch": "npm run build:server -- --watch",
