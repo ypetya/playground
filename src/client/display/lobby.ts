@@ -1,29 +1,30 @@
 import Lobby from "../../model/lobby";
-import * as d3 from "d3";
+import Component from "../../client/display/component";
+import UserComponent from "../../client/display/user";
+import Person from "../../model/person";
 
-export default class LobbyComponent {
-    private data : Array<Lobby>;
-    private d3Component : any;
-    
-    constructor(lobbyData?: Lobby) {
-        this.data = [lobbyData];
+export default class LobbyComponent extends Component {
+    protected componentClass = "lobby";
+
+    protected subComponents: Array<Component> = [];
+
+    public setData(data?: any) {
+        super.setData(data);
+        if (this.data && this.data.length) {
+            const subComponent = new UserComponent(this.data[0].getPeople());
+            this.subComponents = [subComponent];
+        }
+    }
+
+    protected getText(data: Lobby) {
+        return "Lobby";
     }
 
     public render() {
-        // update
-        this.d3Component = d3.selectAll(".lobby")
-            .data(this.data)
-            .text((data)=>data.getPeople());
-        // enter
-        this.d3Component
-            .enter()
-            .append("div")
-            .text((data:Lobby)=>data.getPeople());
-        // exit
-        this.d3Component.exit().remove();
-    }
-
-    public update(data:Lobby) {
-        this.data = [data];
+        super.render();
+        this.subComponents.forEach(c => {
+            c.setParent(this.d3Component)
+            c.render();
+        });
     }
 }

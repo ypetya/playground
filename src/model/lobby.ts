@@ -5,13 +5,13 @@ export default class Lobby {
 
   constructor(lobby?: Lobby) {
     this.people = new Array();
-    if(lobby) {
-       this.people = lobby.people.map((p)=> new Person(p));
-    } 
+    if (lobby) {
+      this.people = lobby.people.map((p) => new Person(p));
+    }
   }
 
   private findOrCreate(name: string): Person {
-    let i:number;
+    let i: number;
     for (i = 0; i < this.people.length; i++) {
       if (this.people[i].getName() === name) {
         return this.people[i];
@@ -38,7 +38,8 @@ export default class Lobby {
     if (i < this.people.length) this.people.splice(i);
   }
 
-  public getPeople(): string {
-    return this.people.map((p) => p.getName()).join(',') || 'nobody';
+  public getPeople() {
+    //return this.people.map((p) => p.getName()).join(',') || 'nobody';
+    return this.people;
   }
 }

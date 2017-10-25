@@ -1,11 +1,11 @@
 import Lobby from "../model/lobby";
-import { IOSocket, TransferObject } 
-from "../interface/definitions";
+import { IOSocket, TransferObject }
+    from "../interface/definitions";
 
 let socketIo = require("socket.io");
 
 export default class Socket {
-    private io : IOSocket;
+    private io: IOSocket;
 
     private lobby: Lobby;
 

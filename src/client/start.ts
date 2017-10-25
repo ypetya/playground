@@ -8,19 +8,19 @@ import LobbyComponent from "../client/display/lobby";
 import io = require("socket.io");
 
 const socket: any = io("/");
-const lobbyComponent : LobbyComponent = new LobbyComponent();
+const lobbyComponent: LobbyComponent = new LobbyComponent();
 
 socket.on('lobby', (data: Lobby) => {
     const lobbyData = new Lobby(data);
-    lobbyComponent.update(lobbyData);
+    lobbyComponent.setData(lobbyData);
 
     lobbyComponent.render();
-    
+
     setInterval(addClient, 20000);
 });
 
 socket.on('propagate', (data: Lobby) => {
-    lobbyComponent.update(new Lobby(data));
+    lobbyComponent.setData(new Lobby(data));
 
     lobbyComponent.render();
 });
