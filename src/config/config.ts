@@ -1,5 +1,5 @@
 
-export class Config{
+export class Config {
 
     public environment: string;
     public url: string;
@@ -8,10 +8,12 @@ export class Config{
 
     constructor(env: string) {
         this.environment = env;
-        this.url = 'http://localhost:8080';
-        this.host = 'localhost';
-        this.port = 8080;
+
+        this.host = process.env.NODE_ENV === "production" ? "playground15.herokuapp.com" : "localhost";
+        this.port = process.env.PORT || 8080;
+
+        this.url = `http://${this.host}:${this.port}`;
     }
 };
 
-export default new Config('default');
+export default new Config( process.env.NODE_ENV || 'default');

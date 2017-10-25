@@ -22,12 +22,13 @@
     "build:server": "tsc --pretty",
     "build:client": "tsc -p src/client/",
     "test": "npm run build && mocha --compilers ts:ts-node/register --recursive \"test/**/*-spec.ts\"",
-    "serve": "node lib/server/index.js",
+    "start": "node lib/server/index.js",
     "run": "npm run build && npm run serve",
     "serve:dev": "npm run watch & nodemon lib/server/index.js",
     "coverage": "nyc --include=\"src/**/*.ts\" --reporter=text --reporter=html --reporter=lcov mocha --compilers ts:ts-node/register --recursive \"test/**/*-spec.ts\"",
     "watch": "npm run build:server -- --watch",
-    "watch:test": "npm run test -- --watch"
+    "watch:test": "npm run test -- --watch",
+    "postinstall": "npm run build"
   },
   "dependencies": {
     "body-parser": "^1.17.2",
@@ -35,9 +36,7 @@
     "lodash": "^4.17.4",
     "nodemon": "^1.12.1",
     "requirejs": "^2.3.5",
-    "socket.io": "^2.0.3"
-  },
-  "devDependencies": {
+    "socket.io": "^2.0.3",
     "@types/body-parser": "^1.16.3",
     "@types/chai": "^3.0.0",
     "@types/express": "^4.0.35",
@@ -50,8 +49,8 @@
     "rimraf": "^2.0.0",
     "ts-node": "^3.0.0",
     "tslint": "^5.0.0",
-    "typescript": "^2.0.0",
-    "coveralls": "^2.0.0"
+    "coveralls": "^2.0.0",
+    "typescript": "=2.5.2"
   },
   "engines": {
     "node": ">=4.0.0"

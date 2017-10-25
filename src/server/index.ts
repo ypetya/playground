@@ -2,10 +2,7 @@
 import * as express from "express";
 import { Application } from "express";
 import Socket from "./socket";
-
-// config
-const host = process.env.YOUR_HOST || "localhost";
-const port = process.env.PORT || 8080;
+import config from "../config/config";
 
 const app: Application = express();
 
@@ -21,8 +18,8 @@ app.use("/client", express.static(__dirname + "/../client"));
 app.use("/require.js",express.static(__dirname + "/../../node_modules/requirejs/require.js"));
 
 // serve
-const server = app.listen(port, host, () => {
-    console.info(`App listening on port ${port}! ${__dirname}`);
+const server = app.listen(config.port, () => {
+    console.info(`App listening on ${config.port}! ${__dirname}`);
 });
 
 // socket
