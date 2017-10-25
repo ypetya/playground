@@ -1,13 +1,12 @@
 
 import Person from "../model/person";
 import Lobby from "../model/lobby";
-import config from "../config/config";
 import { TransferObject }
     from "../interface/definitions";
 
 import io = require("socket.io");
 
-const socket: any = io(config.url);
+const socket: any = io("/");
 
 socket.on('lobby', (data: Lobby) => {
     console.log(data.toString());
