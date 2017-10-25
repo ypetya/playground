@@ -16,6 +16,7 @@ app.all('/', (req, res, next: Function) => {
 app.use(express.static(__dirname + "/../../public"));
 app.use("/client", express.static(__dirname + "/../client"));
 app.use("/require.js",express.static(__dirname + "/../../node_modules/requirejs/require.js"));
+app.use("/d3.js",express.static(__dirname + "/../../node_modules/d3/build/d3.js"));
 
 // serve
 const server = app.listen(config.port, () => {

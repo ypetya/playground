@@ -3,8 +3,11 @@ import Person from './person';
 export default class Lobby {
   private people: Array<Person>;
 
-  constructor() {
+  constructor(lobby?: Lobby) {
     this.people = new Array();
+    if(lobby) {
+       this.people = lobby.people.map((p)=> new Person(p));
+    } 
   }
 
   private findOrCreate(name: string): Person {
@@ -14,7 +17,8 @@ export default class Lobby {
         return this.people[i];
       }
     }
-    let person = new Person(name);
+    let person = new Person();
+    person.setName(name);
     this.people.push(person);
 
     return person;
@@ -32,5 +36,9 @@ export default class Lobby {
       if (this.people[i].getName() === name) break;
     }
     if (i < this.people.length) this.people.splice(i);
+  }
+
+  public getPeople(): string {
+    return this.people.map((p) => p.getName()).join(',') || 'nobody';
   }
 }

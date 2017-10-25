@@ -33,5 +33,6 @@ export default class Socket {
     private add(data: TransferObject) {
         console.log('add', data);
         this.lobby.add(data.name);
+        this.io.emit('propagate', this.lobby);
     }
 }

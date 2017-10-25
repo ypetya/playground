@@ -12,6 +12,7 @@ requirejs.config({
   },
   paths: {
     'socket.io': '/socket.io/socket.io',
+    'd3': '/d3'
   }
 });
 
