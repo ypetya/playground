@@ -13,10 +13,9 @@ const lobbyComponent: LobbyComponent = new LobbyComponent();
 socket.on('lobby', (data: Lobby) => {
     const lobbyData = new Lobby(data);
     lobbyComponent.setData(lobbyData);
-
     lobbyComponent.render();
 
-    setInterval(addClient, 20000);
+    setInterval(addClient, 10000);
 });
 
 socket.on('propagate', (data: Lobby) => {
@@ -26,7 +25,10 @@ socket.on('propagate', (data: Lobby) => {
 });
 
 function addClient() {
+    let userName = localStorage.getItem("userName") || "Guest " + Number(new Date());
+    localStorage.setItem("userName", userName);
+
     socket.emit('add', {
-        name: 'Peter ' + Number(new Date())
+        name: userName 
     });
 }

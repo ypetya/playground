@@ -13,10 +13,16 @@ export default class Lobby {
   private findOrCreate(name: string): Person {
     let i: number;
     for (i = 0; i < this.people.length; i++) {
-      if (this.people[i].getName() === name) {
-        return this.people[i];
+      let user = this.people[i];
+      if (user.getName() === name) {
+        user.touch();
+        return user;
+      }
+      if(!user.isPresent()) {
+        this.people.splice(i--,1);
       }
     }
+    
     let person = new Person();
     person.setName(name);
     this.people.push(person);
@@ -39,7 +45,6 @@ export default class Lobby {
   }
 
   public getPeople() {
-    //return this.people.map((p) => p.getName()).join(',') || 'nobody';
     return this.people;
   }
 }

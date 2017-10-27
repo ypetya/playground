@@ -1,3 +1,4 @@
+const TIMEOUT = 30000;//ms
 export default class Person {
   private name: string;
   private lastSeen: Date;
@@ -14,6 +15,10 @@ export default class Person {
 
   public touch() {
     this.lastSeen = new Date();
+  }
+
+  public isPresent() {
+    return (Number(new Date()) - Number(this.lastSeen)) <= TIMEOUT;
   }
 
   public getLastSeen(): Date {
