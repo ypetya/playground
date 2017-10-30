@@ -1,4 +1,6 @@
 import Lobby from "../model/lobby";
+import Message from "../model/message";
+
 import { IOSocket, TransferObject }
     from "../interface/definitions";
 
@@ -24,15 +26,23 @@ export default class Socket {
     private onConnect(socket: IOSocket) {
         socket.emit("lobby", this.lobby);
         socket.on("add", this.add.bind(this));
+        socket.on("message", this.message.bind(this));
     }
 
     private onDisconnect(socket: IOSocket) {
-        console.log('disconnect', socket);
+        console.log("disconnect", socket);
     }
 
     private add(data: TransferObject) {
-        console.log('add', data);
+        console.log("add", data);
         this.lobby.add(data.name);
-        this.io.emit('propagate', this.lobby);
+        if (this.lobby.hasChange()) {
+            this.io.emit("lobby:change", this.lobby);
+        }
+    }
+
+    private message(data: any) {
+        const m = new Message(data);
+        this.io.emit("message:sent", m);
     }
 }

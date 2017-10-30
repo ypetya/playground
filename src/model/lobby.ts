@@ -2,12 +2,18 @@ import Person from './person';
 
 export default class Lobby {
   private people: Array<Person>;
+  private changed: boolean;
 
   constructor(lobby?: Lobby) {
     this.people = new Array();
     if (lobby) {
       this.people = lobby.people.map((p) => new Person(p));
     }
+    this.changed = false;
+  }
+
+  public hasChange() : boolean {
+    return this.changed;
   }
 
   private findOrCreate(name: string): Person {
@@ -19,15 +25,20 @@ export default class Lobby {
         return user;
       }
       if(!user.isPresent()) {
-        this.people.splice(i--,1);
+        this.removeIth(i--);
       }
     }
     
     let person = new Person();
     person.setName(name);
     this.people.push(person);
-
+    this.changed = true;
     return person;
+  }
+
+  private removeIth(ith:number): void {
+    this.people.splice(ith,1);
+    this.changed = true;
   }
 
   public add(name: string): Person {
