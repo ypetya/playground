@@ -1,8 +1,8 @@
 import PersonModel from "../../model/person";
-import Component from "../../client/display/component";
+import TextComponent from "./textcomponent";
 
-export default class Person extends Component {
-    componentClass = "person";
+export default class Person extends TextComponent {
+    protected componentClass = "person";
 
     getText(person:PersonModel) {
         return person.getName();

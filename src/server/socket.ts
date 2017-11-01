@@ -12,22 +12,21 @@ export default class Socket {
     private lobby: Lobby;
 
     constructor(server: any) {
-        this.io = socketIo(server);
         this.lobby = new Lobby();
-
-        this.bind();
+        this.io = socketIo(server);
+        this.io.on("connect", this.onConnect.bind(this));
+        this.io.on("disconnect", this.onDisconnect.bind(this))
     }
 
-    private bind() {
-        this.io.on("connect", this.onConnect.bind(this));
-        this.io.on("disconnect", this.onDisconnect.bind(this));
+    private bind(socket: IOSocket) {
+        socket.on("add", this.add.bind(this));
+        socket.on("remove", this.remove.bind(this));
+        socket.on("message", this.message.bind(this));
     }
 
     private onConnect(socket: IOSocket) {
         socket.emit("lobby", this.lobby);
-        socket.on("add", this.add.bind(this));
-        socket.on("remove", this.remove.bind(this));
-        socket.on("message", this.message.bind(this));
+        this.bind(socket);
     }
 
     private onDisconnect(socket: IOSocket) {

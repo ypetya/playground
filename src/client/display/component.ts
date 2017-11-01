@@ -1,67 +1,40 @@
 import * as d3 from "d3";
+import SingleComponent from "./singlecomponent";
 
-const defaultContainer = d3.select("body");
+export default class Component extends SingleComponent {
 
-export default class Component {
-    protected data: Array<any>;
-    protected d3Component: any;
-    protected componentClass: string;
-    protected tagName = "div";
-    protected parent:any = defaultContainer;
+    private subComponentsCreated: boolean = false;
+    protected subComponents: Array<Component>;
 
-    constructor(data?: any) {
-        this.setData(data);
-    }
+    public render(): Component {
+        //console.log('render', this.componentClass, this.parent.node());
+        super.render();
 
-    public render() : Component {
-        this.update();
-        this.enter();
-        this.exit();
+        this.d3SelectionEnter.call((parentNode: any) => {
 
-        this.bindEvents();
+            this.subComponents.forEach((c: Component, i: number) => {
+                // set parent only if not explicitly set
+                if (c.parent == null) c.parent = parentNode;
+
+                c.render();
+            });
+        });
+        //console.log('render finished', this.componentClass);
         return this;
     }
 
-    protected update() {
-        this.d3Component = this.parent
-            .selectAll(`.${this.componentClass}`)
-            .data(this.data)
-            .text(this.getText);
-    }
-
-    protected enter() {
-        this.d3Component
-            .enter()
-            .append(this.tagName)
-            .classed(this.componentClass, true)
-            .text(this.getText);
-    }
-
-    protected exit() {
-        this.d3Component.exit().remove();
-    }
-
-    /**
-     * d3Component is ready, bind events to it 
-     */
-    protected bindEvents() {
-    }
-
-    public setData(data: any) {
-        if (Array.isArray(data)) {
-            this.data = data;
-        } else {
-            this.data = data ? [data] : [];
+    public setData(data?: any) {
+        if (!this.subComponentsCreated) {
+            this.subComponents = new Array<Component>();
+            this.createSubComponents();
+            this.subComponentsCreated = true;
         }
-        return this;
+        return super.setData(data);
     }
 
-    protected getText(data?: any) {
-        return data || "";
-    }
-
-    public setParent(parent: any) {
-        this.parent = parent;
-        return this;
+    /** 
+     * populate subcomponents
+    */
+    protected createSubComponents() {
     }
 }
