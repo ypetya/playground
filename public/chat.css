@@ -1,0 +1,46 @@
+
+body {
+	font-family: 'Helvetica Neue Thin', Verdana;
+}
+
+h1 {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 128px;
+    text-align: center;
+    margin: 0;
+}
+
+.lobby {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 64px;
+ 	margin: 32px 0;
+	border-width: 0px 0 8px 0;
+	border-style: solid;
+	border-color: red;
+}
+
+.lobby .person, .message .sender {
+    font-size: 9pt;
+    display: inline;
+    margin: 5px;
+}
+
+.message .sender {
+    font-weight: bold;
+}
+
+p.message {
+    margin-bottom: 16px;
+}
+
+.message .text {
+    font-family: Courier New, Courier, monospace;
+}
+
+input {
+    border-style: dotted;
+    margin: 8px;
+}
+input.new_message {
+    width: 56%;
+}
