@@ -26,6 +26,7 @@ export default class Socket {
     private onConnect(socket: IOSocket) {
         socket.emit("lobby", this.lobby);
         socket.on("add", this.add.bind(this));
+        socket.on("remove", this.remove.bind(this));
         socket.on("message", this.message.bind(this));
     }
 
@@ -36,6 +37,16 @@ export default class Socket {
     private add(data: TransferObject) {
         console.log("add", data);
         this.lobby.add(data.name);
+        this.triggerChanges()
+    }
+
+    private remove(data: TransferObject) {
+        console.log("remove", data);
+        this.lobby.remove(data.name);
+        this.triggerChanges();
+    }
+
+    private triggerChanges() {
         if (this.lobby.hasChange()) {
             this.io.emit("lobby:change", this.lobby);
         }

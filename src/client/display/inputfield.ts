@@ -9,7 +9,7 @@ export default class InputFieldComponent extends Component {
     private d3Node:any;
 
     constructor(fieldName: string) {
-        super({ value: ''});
+        super('');
         this.componentClass = fieldName;
     }
 
@@ -31,7 +31,7 @@ export default class InputFieldComponent extends Component {
             .append(this.tagName)
             .classed(this.componentClass, true)
             .attr('type','text')
-            .text('');
+            .attr('value', (d) => d.value);
     }
 
     protected bindEvents() {
@@ -42,8 +42,18 @@ export default class InputFieldComponent extends Component {
     private onKey() {
         if(d3.event.key == "Enter"){
             const message = this.d3Node.node().value;
-            this.callbackFn(message);
-            this.d3Node.node().value = '';
+            const newValue = this.callbackFn(message);
+            this.d3Node.node().value = newValue;
         };
+    }
+
+
+    public setData(data: any) {
+        if (Array.isArray(data)) {
+            this.data = data;
+        } else {
+            this.data = typeof(data) == "string" ? [{value: data}] : [];
+        }
+        return this;
     }
 }

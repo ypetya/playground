@@ -3,6 +3,7 @@ import io = require("socket.io");
 import * as d3 from "d3";
 
 const content = d3.select(".content");
+const userInputArea = d3.select('.input');
 
 import Person from "../model/person";
 import Lobby from "../model/lobby";
@@ -18,8 +19,13 @@ const lobbyComponent = new LobbyComponent().setParent(content);
 const messageComponent= new MessageComponent().setParent(content);
 const messages = new Array<Message>();
 const inputFieldComponent = new InputFieldComponent("new_message")
-    .setParent(d3.select('.input'))
+    .setParent(userInputArea)
     .setCallbackOnEnter(sendMessage)
+    .render();
+const userNameInputFieldComponent = new InputFieldComponent("user_name")
+    .setParent(userInputArea)
+    .setCallbackOnEnter(changeUserName)
+    .setData(getUserName())
     .render();
 
 socket.on('lobby', (data: Lobby) => {
@@ -52,13 +58,24 @@ function createAndUpdateClient() {
 let me:Person;
 
 function addClient() {
-    let userName = localStorage.getItem("userName") || "Guest " + Number(new Date());
-    localStorage.setItem("userName", userName);
-
     me = new Person();
-    me.setName(userName);
+    me.setName(getUserName());
     
     socket.emit('add', me);
+}
+
+function changeUserName(userName:string) {
+    socket.emit('remove', me);
+    localStorage.setItem("userName", userName);
+    addClient();
+
+    return userName;
+}
+
+function getUserName() {
+    let userName = localStorage.getItem("userName") || "Guest " + Number(new Date());
+    localStorage.setItem("userName", userName);
+    return userName;
 }
 
 function sendMessage(text: string) {
@@ -66,4 +83,6 @@ function sendMessage(text: string) {
     message.create(me, text);
 
     socket.emit('message',message);
+
+    return '';
 }

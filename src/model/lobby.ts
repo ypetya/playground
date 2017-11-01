@@ -53,6 +53,7 @@ export default class Lobby {
       if (this.people[i].getName() === name) break;
     }
     if (i < this.people.length) this.people.splice(i);
+    this.changed = true;
   }
 
   public getPeople() {
