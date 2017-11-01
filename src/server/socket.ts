@@ -47,6 +47,7 @@ export default class Socket {
 
     private triggerChanges() {
         if (this.lobby.hasChange()) {
+            this.lobby.resetChanges();
             this.io.emit("lobby:change", this.lobby);
         }
     }

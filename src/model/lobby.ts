@@ -16,20 +16,29 @@ export default class Lobby {
     return this.changed;
   }
 
+  public resetChanges() {
+    this.changed = false;
+  }
+
   private findOrCreate(name: string): Person {
     let i: number;
+    let person: Person;
     for (i = 0; i < this.people.length; i++) {
       let user = this.people[i];
       if (user.getName() === name) {
         user.touch();
-        return user;
+        person = user;
+        continue;
       }
       if(!user.isPresent()) {
         this.removeIth(i--);
       }
     }
+    if( person) {
+      return person;
+    }
     
-    let person = new Person();
+    person = new Person();
     person.setName(name);
     this.people.push(person);
     this.changed = true;
@@ -52,7 +61,7 @@ export default class Lobby {
     for (i = 0; i < this.people.length; i++) {
       if (this.people[i].getName() === name) break;
     }
-    if (i < this.people.length) this.people.splice(i);
+    if (i < this.people.length) this.people.splice(i,1);
     this.changed = true;
   }
 

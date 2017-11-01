@@ -1,6 +1,15 @@
 import * as d3 from "d3";
 import SingleComponent from "./singlecomponent";
 
+/**
+ * ComplexComponent 
+ * 
+ * Feature : able to render subcomponents
+ * Supports :
+ *  - calling createSubComponents method on data bind
+ *  - calls the render method of each subcomponent present in the subComponents Array
+ *  - chains subcomponents as beeing descendent. sets up subcomponents parent initially if needed 
+ */
 export default class Component extends SingleComponent {
 
     private subComponentsCreated: boolean = false;

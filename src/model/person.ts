@@ -18,7 +18,7 @@ export default class Person {
   }
 
   public isPresent() {
-    return (Number(new Date()) - Number(this.lastSeen)) <= TIMEOUT;
+    return (Number(new Date()) - Number(this.lastSeen)) < TIMEOUT;
   }
 
   public getLastSeen(): Date {

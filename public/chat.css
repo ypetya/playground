@@ -1,22 +1,39 @@
 
 body {
 	font-family: 'Helvetica Neue Thin', Verdana;
+    margin: 8px 8px 0 8px;
 }
 
 h1 {
     font-family: 'Times New Roman', Times, serif;
     font-size: 128px;
     text-align: center;
-    margin: 0;
+    margin: 8px 0;
 }
 
 .lobby {
     font-family: 'Times New Roman', Times, serif;
     font-size: 64px;
- 	margin: 32px 0;
+ 	margin: 0 0 32px 0;
 	border-width: 0px 0 8px 0;
 	border-style: solid;
 	border-color: red;
+}
+
+div.content {
+    margin-bottom: 48px;
+}
+
+div.input {
+    position: fixed;
+    bottom: 0px;
+    padding-bottom: 8px;
+	background-color: white;
+	border-top: whitesmoke;
+	border-width: 4px 0 0;
+	border-style: solid;
+	margin-bottom: 0px;
+    width: 100%;
 }
 
 .lobby .person, .message .sender {
@@ -42,5 +59,9 @@ input {
     margin: 8px;
 }
 input.new_message {
-    width: 56%;
+    width: 63%;
+}
+
+inpurt.user_name {
+    width: 110px;
 }

@@ -22,6 +22,15 @@ export default class LobbyComponent extends TextComponent {
     }
 
     protected getText(data: Lobby) {
-        return "Lobby";
+        let len = "";
+        if (data && data.getPeople().length) {
+            len = " # " + data.getPeople().length;
+
+            if(data.getPeople().length>=4) {
+                return "Megvagyunk!";
+            }
+        }
+        return `Lobby${len}`;
+        
     }
 }
