@@ -14,17 +14,19 @@ export default class LobbyComponent extends Component {
             const subComponent = new UserComponent(this.data[0].getPeople());
             this.subComponents = [subComponent];
         }
+        return this;
     }
 
     protected getText(data: Lobby) {
         return "Lobby";
     }
 
-    public render() {
+    public render() : LobbyComponent {
         super.render();
         this.subComponents.forEach(c => {
             c.setParent(this.d3Component)
             c.render();
         });
+        return this;
     }
 }

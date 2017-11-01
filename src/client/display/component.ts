@@ -1,22 +1,25 @@
 import * as d3 from "d3";
 
-const content = d3.select(".content");
+const defaultContainer = d3.select("body");
 
 export default class Component {
     protected data: Array<any>;
     protected d3Component: any;
     protected componentClass: string;
     protected tagName = "div";
-    protected parent = content;
+    protected parent:any = defaultContainer;
 
     constructor(data?: any) {
         this.setData(data);
     }
 
-    public render() {
+    public render() : Component {
         this.update();
         this.enter();
         this.exit();
+
+        this.bindEvents();
+        return this;
     }
 
     protected update() {
@@ -38,12 +41,19 @@ export default class Component {
         this.d3Component.exit().remove();
     }
 
+    /**
+     * d3Component is ready, bind events to it 
+     */
+    protected bindEvents() {
+    }
+
     public setData(data: any) {
         if (Array.isArray(data)) {
             this.data = data;
         } else {
             this.data = data ? [data] : [];
         }
+        return this;
     }
 
     protected getText(data?: any) {
@@ -52,5 +62,6 @@ export default class Component {
 
     public setParent(parent: any) {
         this.parent = parent;
+        return this;
     }
 }

@@ -15,11 +15,9 @@ export default class MessageComponent extends Component {
     protected update() {
         this.d3Component = this.parent
             .selectAll(`.${this.componentClass}`)
-            .data(this.data)
-            .each(function(d:Message){
-                d3.select(".sender").text(d.getSender().getName());
-                d3.select(".text").text(d.getText());
-            });
+            .data(this.data);
+        
+        console.log(this.data);
     }
 
     protected enter() {
