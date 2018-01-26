@@ -1,45 +1,44 @@
-
 body {
-	font-family: 'Helvetica Neue Thin', Verdana;
-    margin: 8px 8px 0 8px;
+    font-family: 'Helvetica Neue Thin', Verdana;
+    margin: 1vw 1vh 0 1vw;
 }
 
 h1 {
     font-family: 'Times New Roman', Times, serif;
-    font-size: 128px;
+    font-size: 15vmin;
     text-align: center;
-    margin: 8px 0;
+    margin: 1vmin 0;
 }
 
 .lobby {
     font-family: 'Times New Roman', Times, serif;
-    font-size: 64px;
- 	margin: 0 0 32px 0;
-	border-width: 0px 0 8px 0;
-	border-style: solid;
-	border-color: red;
+    font-size: 5vmin;
+    margin: 0 0 4vh 0;
+    border-width: 0 0 1vh 0;
+    border-style: solid;
+    border-color: red;
 }
 
 div.content {
-    margin-bottom: 48px;
+    margin-bottom: 6vh;
 }
 
 div.input {
     position: fixed;
-    bottom: 0px;
-    padding-bottom: 8px;
-	background-color: white;
-	border-top: whitesmoke;
-	border-width: 4px 0 0;
-	border-style: solid;
-	margin-bottom: 0px;
+    bottom: 0;
+    background-color: white;
+    border-top: whitesmoke;
+    border-width: 0.5vh 0 0;
+    border-style: solid;
+    margin-bottom: 0;
     width: 100%;
 }
 
-.lobby .person, .message .sender {
-    font-size: 9pt;
+.lobby .person,
+.message .sender {
+    font-size: 2vmin;
     display: inline;
-    margin: 5px;
+    margin: 0.5vmin;
 }
 
 .message .sender {
@@ -47,7 +46,8 @@ div.input {
 }
 
 p.message {
-    margin-bottom: 16px;
+    margin-bottom: 2vh;
+    font-size: 3vmin;
 }
 
 .message .text {
@@ -56,12 +56,34 @@ p.message {
 
 input {
     border-style: dotted;
-    margin: 8px;
+    margin: 1vw 2.5vw;
 }
+
 input.new_message {
     width: 63%;
 }
 
 inpurt.user_name {
-    width: 110px;
+    width: 40%;
+}
+
+
+/** Mobile mode */
+
+@media (max-aspect-ratio:1/1) {
+    h1 {
+        font-size: 10vh;
+    }
+    .lobby {
+        font-size: 5vh;
+    }
+
+    input.new_message {
+        font-size: 4vh;
+        width: 95%;
+    }
+    input.user_name {
+        font-size: 3vh;
+        width: 95%;
+    }
 }

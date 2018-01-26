@@ -31,6 +31,6 @@ export default class LobbyComponent extends TextComponent {
             }
         }
         return `Lobby${len}`;
-        
+
     }
 }
